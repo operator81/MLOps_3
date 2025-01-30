@@ -1,0 +1,31 @@
+name: dvc_pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dvc_process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.8'  
+
+      - name: Install dependencies
+        run: |
+          pip install pandas dvc
+
+      - name: Prepare data
+        run: python data_preparation.py  
+
+      - name: Clean up data
+        run: python data_cleanup.py  
+
+      - name: DVC Push
+        run: dvc push  
