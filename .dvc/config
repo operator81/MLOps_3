@@ -1,0 +1,6 @@
+[core]
+    remote = mlops_3remote
+['remote "myremote"']
+    url = gdrive://1crhTTJhRDfMFXz59MDhmmPdCxpQXScJl
+['remote "mlops_3remote"']
+    url = gdrive://1crhTTJhRDfMFXz59MDhmmPdCxpQXScJl
