@@ -25,7 +25,20 @@ jobs:
         run: python data_preparation.py  
 
       - name: Clean up data
-        run: python data_cleanup.py  
+        run: python data_cleanup.py
+        
+      - name: Install DVC S3
+        run: pip install dvc-s3
+
+      - name: Configure DVC Remote
+        run: |
+           dvc remote add -d myremote s3://mlops3
+           
+      - name: Configure DVC Remote
+        run: |
+           dvc remote modify remote3 access_key_id ${{ secrets.YANDEX_ACCESS_KEY_ID }}
+           dvc remote modify remote3 secret_access_key ${{ secrets.YANDEX_SECRET_ACCESS_KEY }}
+           dvc remote modify remote3 endpointurl https://storage.yandexcloud.net
 
       - name: DVC Push
         run: dvc push  
